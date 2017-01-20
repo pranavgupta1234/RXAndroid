@@ -34,6 +34,9 @@ dependencies {
     // libs like rxbinding + rxjava-math haven't been ported to RxJava 2.x yet, so this helps
     compile "com.github.akarnokd:rxjava2-interop:0.6.1"
 
+    //android binding
+    compile 'com.jakewharton:butterknife:7.0.1'
+
     compile 'io.reactivex:rxjava-math:1.0.0'
     compile 'com.jakewharton.rxrelay:rxrelay:1.2.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
