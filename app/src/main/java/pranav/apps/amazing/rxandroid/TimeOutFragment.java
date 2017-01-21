@@ -41,11 +41,6 @@ public class TimeOutFragment extends Fragment{
     private List<String> _logs;
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         if(!_disposable.isDisposed()){
@@ -62,7 +57,7 @@ public class TimeOutFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_buffer,container,false);
+        View view = inflater.inflate(R.layout.fragment_timeout,container,false);
         ButterKnife.bind(this,view);
         return view;
     }
@@ -94,7 +89,7 @@ public class TimeOutFragment extends Fragment{
             @Override
             public void subscribe(ObservableEmitter<String> subscriber) throws Exception {
                 _log("Sorry bro :D Time Out");
-                subscriber.onComplete();
+                subscriber.onError(new Throwable("Timeout Error"));
             }
         });
     }

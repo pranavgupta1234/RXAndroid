@@ -34,6 +34,11 @@ public class MainFragment extends Fragment {
         clickedOn(new BufferFragment());
     }
 
+    @OnClick(R.id.btn_demo_timeout)
+    void TimeOut(){
+        clickedOn(new TimeOutFragment());
+    }
+
     private void clickedOn(@NonNull Fragment fragment){
         final String tag = fragment.getClass().toString();
         getActivity().getSupportFragmentManager()
