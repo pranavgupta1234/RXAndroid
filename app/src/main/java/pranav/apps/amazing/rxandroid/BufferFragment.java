@@ -38,7 +38,9 @@ public class BufferFragment extends Fragment {
     private LogAdapter _logAdapter;
     private List<String> _logs;
 
-    /** disposable acts as a observable and is used with disposable observer which acts as a observer
+    /** disposable is an interface
+     * It has methods -> .isDisposed() and .dispose()
+     * disposable acts as a observable and here it is used with disposable observer which acts as a observer
      * */
     private Disposable _disposable;
 
@@ -51,7 +53,9 @@ public class BufferFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        _disposable.dispose();
+        if(!_disposable.isDisposed()) {
+            _disposable.dispose();
+        }
     }
 
     @Override
@@ -60,6 +64,11 @@ public class BufferFragment extends Fragment {
         _setupLogger();
     }
 
+    /** here RxView.clickEvents(_tapBtn) returns an v1 observable but as rx binding is still not upgraded to rxjava 2 so use this
+     * conversion library then the tapped events by source observable are converted to Integer and we buffer those in timespan of 4 sec
+     * After each buffer is released (obviously now buffer will be a list of integer,one can verify that in onNext of subscriber) we
+     * print the total taps we received
+     * */
     private Disposable getDisposableforBuffer() {
         return RxJavaInterop.toV2Observable(RxView.clickEvents(_tapBtn))
                 .map(new Function<ViewClickEvent, Integer>() {
