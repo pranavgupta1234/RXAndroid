@@ -61,6 +61,15 @@ public class TimeOutFragment extends Fragment{
         ButterKnife.bind(this,view);
         return view;
     }
+    /**Returns an Observable that mirrors the source ObservableSource but applies a timeout policy for each emitted item.
+     *  If the next item isn't emitted within the specified timeout duration starting from its predecessor, the resulting
+     *  ObservableSource begins instead to mirror a fallback ObservableSource
+     *
+     *  By default it runs on computation scheduler
+     *
+     *  One can also see in the log window that the message of Sorry bro :D is not on main thread because we have subscribed on
+     *  computation thread
+     * */
 
     @OnClick(R.id.btn_demo_timeout_1_2s)
     void TimeTakingTask_2s(){
@@ -94,7 +103,14 @@ public class TimeOutFragment extends Fragment{
         });
     }
 
-
+    /** one can also see that a similar kind of subscribe() function was available it was call and an Observable.OnSubscribe instance
+     * and it was fired as soon as an observer subscribe with it
+     *
+     * Here in this case say of 5 sec button after the task is timeout after 3 sec the control passes or mirrors to the other observable
+     * as defined by us in the timeout operator and that subscription is again on computation thread so the message it logs  independently
+     * i.e without any use of subscriber or observer is not executed on main thread but as we are observing on main thread so the values
+     * for the call to onError method od subscriber will be executed on main thread
+     * */
     private Observable<String> take2sToCompleteObservable(){
         return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -136,7 +152,7 @@ public class TimeOutFragment extends Fragment{
 
             @Override
             public void onError(Throwable e) {
-                _log("Error Occurred");
+                _log(e.getMessage());
             }
 
             @Override
