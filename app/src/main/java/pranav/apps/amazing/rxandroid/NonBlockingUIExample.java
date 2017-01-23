@@ -37,7 +37,6 @@ public class NonBlockingUIExample extends Fragment{
 
     private LogAdapter _logAdapter;
     private List<String> _logs;
-    private ListView _logList;
 
     /** composite disposables are used to add many disposable observers or disposable to group into one unit so then we can easily
      * remove all at one go whenever we destroy the view
@@ -79,7 +78,7 @@ public class NonBlockingUIExample extends Fragment{
             public Boolean apply(Boolean aBoolean) throws Exception {
                 _log("We are inside map operator of Observable");
                 _doSomethingLong();
-                return null;
+                return aBoolean;
             }
         });
     }
@@ -132,7 +131,7 @@ public class NonBlockingUIExample extends Fragment{
     private void _setupLogger() {
         _logs = new ArrayList<>();
         _logAdapter = new LogAdapter(getActivity(),_logs);
-        _logList.setAdapter(_logAdapter);
+        _logsList.setAdapter(_logAdapter);
     }
 
     private void _log(String logMsg) {

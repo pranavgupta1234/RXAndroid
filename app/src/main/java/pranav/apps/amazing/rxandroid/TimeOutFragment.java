@@ -43,7 +43,7 @@ public class TimeOutFragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
-        if(!_disposable.isDisposed()){
+        if(_disposable!=null){
             _disposable.dispose();
         }
     }

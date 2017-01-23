@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,6 +39,10 @@ public class MainFragment extends Fragment {
     @OnClick(R.id.btn_demo_timeout)
     void TimeOut(){
         clickedOn(new TimeOutFragment());
+    }
+    @OnClick(R.id.btn_demo_schedulers)
+    void NonBlockingUI(){
+        clickedOn(new NonBlockingUIExample());
     }
 
     private void clickedOn(@NonNull Fragment fragment){
